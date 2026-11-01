@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#08080f">
+<title>زخرفة • ملصقات • رموز</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Cairo","Tajawal",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+    background:#08080f;color:#eef0ff;min-height:100vh;overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* خلفية متوهجة */
+  body::before,body::after{
+    content:'';position:fixed;border-radius:50%;filter:blur(100px);opacity:.32;
+    z-index:0;pointer-events:none;
+  }
+  body::before{width:360px;height:360px;background:#7c5cff;top:-120px;right:-100px;animation:float1 14s ease-in-out infinite}
+  body::after{width:320px;height:320px;background:#00d9ff;bottom:-120px;left:-100px;animation:float2 17s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,40px)}}
+  @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-30px)}}
+
+  .wrap{position:relative;z-index:2;max-width:960px;margin:0 auto;padding-bottom:60px}
+
+  /* الهيدر */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(8,8,15,.78);
+    -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(255,255,255,.07);
+  }
+  .brand{
+    display:flex;align-items:center;gap:10px;justify-content:center;
+    padding:14px 16px 4px;
+  }
+  .logo{
+    width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:19px;
+    background:linear-gradient(135deg,#7c5cff,#00d9ff);
+    box-shadow:0 8px 22px -8px #7c5cff;
+  }
+  .brand h1{font-size:19px;margin:0;font-weight:800;letter-spacing:.2px}
+  .brand span{font-size:11px;color:#8b90b0;display:block;font-weight:600;margin-top:-2px}
+
+  /* التابات */
+  .tabs{
+    display:flex;gap:8px;overflow-x:auto;padding:10px 14px 14px;
+    scrollbar-width:none;
+  }
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{
+    flex:0 0 auto;padding:10px 18px;border-radius:14px;font-size:14px;font-weight:700;
+    border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.045);
+    color:#a8adc9;cursor:pointer;transition:.25s;font-family:inherit;white-space:nowrap;
+  }
+  .tab:active{transform:scale(.96)}
+  .tab.active{
+    background:linear-gradient(135deg,#7c5cff,#00d9ff);color:#fff;border-color:transparent;
+    box-shadow:0 10px 26px -10px #7c5cff;
+  }
+
+  /* الأقسام */
+  section{display:none;padding:16px 14px;animation:fade .35s ease}
+  section.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .card{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;padding:16px;margin-bottom:14px;
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  }
+  .card-title{
+    font-size:13px;font-weight:800;color:#9aa0c0;margin:0 0 12px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .card-title::before{
+    content:'';width:4px;height:16px;border-radius:4px;
+    background:linear-gradient(180deg,#7c5cff,#00d9ff);
+  }
+
+  textarea,input[type=text],input[type=number]{
+    width:100%;font-family:inherit;font-size:16px;color:#fff;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:16px;padding:14px 16px;outline:none;
+    transition:.2s;resize:vertical;
+  }
+  textarea:focus,input:focus{
+    border-color:#7c5cff;box-shadow:0 0 0 4px rgba(124,92,255,.16);
+    background:rgba(255,255,255,.07);
+  }
+  textarea::placeholder,input::placeholder{color:#6d7292}
+  textarea{min-height:90px;line-height:1.8}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:14px 22px;border-radius:16px;border:none;cursor:pointer;
+    font-family:inherit;font-size:15px;font-weight:800;color:#fff;
+    background:linear-gradient(135deg,#7c5cff,#00d9ff);
+    box-shadow:0 12px 28px -12px #7c5cff;transition:.2s;
+  }
+  .btn:active{transform:scale(.96)}
+  .btn.ghost{
+    background:rgba(255,255,255,.06);color:#c9cde6;
+    border:1px solid rgba(255,255,255,.1);box-shadow:none;
+  }
+
+  /* ✦ تفاعل جميل عند لمس الأزرار */
+  .chip:active{transform:scale(.94)}
+  .spark{position:fixed;font-size:13px;color:#fff;pointer-events:none;z-index:999;
+    text-shadow:0 0 6px #7c5cff;transform:translate(-50%,-50%);
+    animation:sparkGo .6s ease-out forwards}
+  @keyframes sparkGo{
+    0%{transform:translate(-50%,-50%) scale(.4) rotate(0deg);opacity:1}
+    100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1) rotate(90deg);opacity:0}
+  }
+
+  /* صفوف الزخرفة */
+  .style-row{
+    display:flex;align-items:center;gap:10px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:16px;padding:12px 14px;margin-bottom:10px;
+    transition:.2s;
+  }
+  .style-row:active{background:rgba(124,92,255,.15)}
+  .style-name{
+    font-size:10px;font-weight:800;color:#7c5cff;
+    background:rgba(124,92,255,.14);
+    padding:4px 9px;border-radius:8px;flex:0 0 auto;white-space:normal;max-width:98px;line-height:1.3;text-align:center;
+  }
+  .style-out{
+    flex:1;font-size:17px;line-height:1.9;word-break:break-word;
+    min-width:0;white-space:pre-wrap;
+  }
+  .mini-copy{
+    flex:0 0 auto;width:38px;height:38px;border-radius:12px;border:none;
+    background:rgba(255,255,255,.08);color:#cfd3ea;font-size:16px;
+    cursor:pointer;display:grid;place-items:center;transition:.2s;
+  }
+  .mini-copy:active{transform:scale(.9);background:#7c5cff;color:#fff}
+
+  /* شبكة الملصقات والرموز */
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(56px,1fr));
+    gap:8px;
+  }
+  .cell{
+    aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;
+    font-size:26px;line-height:1;border-radius:15px;cursor:pointer;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.07);
+    transition:transform .13s,background .18s;
+    user-select:none;-webkit-user-select:none;padding:0;
+    color:#fff;overflow:hidden;
+  }
+  .cell:active{transform:scale(.85);background:rgba(124,92,255,.4);border-color:#7c5cff}
+  .cell.emoji{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Android Emoji",sans-serif}
+
+  .search-wrap{position:relative;margin-bottom:12px}
+  .search-wrap input{padding-right:46px}
+  .search-ico{
+    position:absolute;right:15px;top:50%;transform:translateY(-50%);
+    color:#6d7292;font-size:16px;pointer-events:none;
+  }
+
+  .count-badge{
+    font-size:11px;font-weight:800;color:#00d9ff;
+    background:rgba(0,217,255,.12);padding:4px 10px;border-radius:20px;
+    margin-right:auto;
+  }
+
+  /* قسم التكرار */
+  .repeat-out{
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;padding:14px;min-height:110px;max-height:280px;
+    overflow-y:auto;font-size:16px;line-height:1.9;word-break:break-word;
+    white-space:pre-wrap;margin-top:12px;
+  }
+  .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .chip{
+    padding:8px 16px;border-radius:12px;font-size:13px;font-weight:800;
+    border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);
+    color:#a8adc9;cursor:pointer;font-family:inherit;transition:.2s;
+  }
+  .chip.active{background:rgba(124,92,255,.22);border-color:#7c5cff;color:#c9bfff}
+
+  /* التوست */
+  #toast{
+    position:fixed;bottom:28px;left:50%;transform:translate(-50%,90px);
+    background:linear-gradient(135deg,#7c5cff,#00d9ff);
+    color:#fff;padding:13px 26px;border-radius:16px;font-weight:800;font-size:14px;
+    box-shadow:0 16px 40px -12px rgba(124,92,255,.8);
+    opacity:0;transition:.35s cubic-bezier(.34,1.56,.64,1);z-index:999;
+    pointer-events:none;white-space:nowrap;
+  }
+  #toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* شاشة التحميل */
+  #loader{
+    position:fixed;inset:0;z-index:1000;display:grid;place-items:center;
+    background:#08080f;transition:opacity .5s,visibility .5s;
+  }
+  #loader.hide{opacity:0;visibility:hidden}
+  .loader-inner{text-align:center}
+  .spinner{
+    width:54px;height:54px;margin:0 auto 18px;border-radius:50%;
+    background:conic-gradient(from 0deg,#7c5cff,#00d9ff,#7c5cff);
+    animation:spin 1s linear infinite;
+    -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 6px),#000 0);
+            mask:radial-gradient(farthest-side,transparent calc(100% - 6px),#000 0);
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  #loader p{color:#8b90b0;font-size:14px;font-weight:700;margin:0}
+
+  .hint{font-size:12px;color:#6d7292;margin:10px 2px 0;line-height:1.7}
+
+  @media(min-width:640px){
+    .grid{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:10px}
+    .cell{font-size:30px}
+  }
+</style>
+</head>
+<body>
+
+<!-- شاشة التحميل -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="spinner"></div>
+    <p>جارٍ تجهيز الملصقات والرموز…</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="logo">✦</div>
+      <div>
+        <h1>زخرفة</h1>
+        <span>ملصقات • رموز • تكرار</span>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-tab="deco">✎ زخرفة الكتابات</button>
+      <button class="tab" data-tab="stickers">😀 الملصقات</button>
+      <button class="tab" data-tab="symbols">★ الرموز</button>
+      <button class="tab" data-tab="repeat">🔁 التكرار</button>
+    </nav>
+  </header>
+
+  <!-- ══════════ قسم الزخرفة ══════════ -->
+  <section id="deco" class="active">
+    <div class="card">
+      <h3 class="card-title">اكتب النص هنا</h3>
+      <textarea id="decoInput" placeholder="اكتب اسمك أو أي كلام… مثال: محمد" maxlength="200"></textarea>
+      <p class="hint">اضغط على أي شكل لنسخه مباشرة ✓</p>
+    </div>
+    <div id="decoResults"></div>
+  </section>
+
+  <!-- ══════════ قسم الملصقات ══════════ -->
+  <section id="stickers">
+    <div class="card" style="padding:14px">
+      <div class="card-title">
+        الملصقات
+        <span class="count-badge" id="stickerCount">0</span>
+      </div>
+      <div class="search-wrap">
+        <input type="text" id="stickerSearch" placeholder="ابحث… (أو الصق ملصقًا)">
+        <span class="search-ico">🔍</span>
+      </div>
+    </div>
+    <div class="grid" id="stickerGrid"></div>
+  </section>
+
+  <!-- ══════════ قسم الرموز ══════════ -->
+  <section id="symbols">
+    <div class="card" style="padding:14px">
+      <div class="card-title">
+        الرموز
+        <span class="count-badge" id="symbolCount">0</span>
+      </div>
+      <div class="search-wrap">
+        <input type="text" id="symbolSearch" placeholder="ابحث… (أو الصق رمزًا)">
+        <span class="search-ico">🔍</span>
+      </div>
+    </div>
+    <div class="grid" id="symbolGrid"></div>
+  </section>
+
+  <!-- ══════════ قسم التكرار ══════════ -->
+  <section id="repeat">
+    <div class="card">
+      <h3 class="card-title">اكتب كلمة أو إيموجي</h3>
+      <input type="text" id="repeatInput" placeholder="مثال: ❤️ أو محمد" maxlength="40">
+      <div class="chip-row" id="countChips">
+        <button class="chip" data-count="100">×100</button>
+        <button class="chip active" data-count="500">×500</button>
+        <button class="chip" data-count="1000">×1000</button>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:14px">
+        <button class="btn" id="repeatBtn" style="flex:1">🔁 تكرار</button>
+        <button class="btn ghost" id="repeatCopy">📋 نسخ</button>
+      </div>
+      <div class="repeat-out" id="repeatOut">النتيجة ستظهر هنا…</div>
+    </div>
+  </section>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════
+   1) نظام النسخ (يعمل على iPhone و Android)
+   ═══════════════════════════════════════════ */
+let toastTimer = null;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1500);
+}
+
+function legacyCopy(text){
+  const isIOS = /ipad|iphone|ipod/i.test(navigator.userAgent) ||
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  try{
+    if(isIOS){
+      const el = document.createElement('div');
+      el.textContent = text;
+      el.style.cssText = 'position:fixed;top:0;left:0;white-space:pre-wrap;opacity:0;font-size:16px;';
+      document.body.appendChild(el);
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      const ok = document.execCommand('copy');
+      sel.removeAllRanges();
+      document.body.removeChild(el);
+      return ok;
+    }
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  }catch(e){ return false; }
+}
+
+async function copyText(text){
+  if(!text) return;
+  let ok = false;
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(text);
+      ok = true;
+    }
+  }catch(e){ ok = false; }
+  if(!ok) ok = legacyCopy(text);
+  toast(ok ? '✓ تم النسخ' : 'تعذّر النسخ، حاول مجددًا');
+  if(navigator.vibrate) navigator.vibrate(12);
+}
+
+/* ═══════════════════════════════════════════
+   1.5) ✦ تفاعل جميل عند لمس الأزرار (شرر متطاير)
+   ═══════════════════════════════════════════ */
+const SPARK_CHARS = ['✦','⋆','✧','★'];
+function spawnBurst(x, y){
+  const n = 5;
+  for(let i = 0; i < n; i++){
+    const s = document.createElement('span');
+    s.className = 'spark';
+    s.textContent = SPARK_CHARS[i % SPARK_CHARS.length];
+    const ang = (Math.PI * 2 / n) * i + Math.random() * 0.6;
+    const dist = 20 + Math.random() * 16;
+    s.style.left = x + 'px';
+    s.style.top = y + 'px';
+    s.style.setProperty('--dx', (Math.cos(ang) * dist).toFixed(1) + 'px');
+    s.style.setProperty('--dy', (Math.sin(ang) * dist).toFixed(1) + 'px');
+    document.body.appendChild(s);
+    s.addEventListener('animationend', () => s.remove());
+  }
+}
+document.addEventListener('pointerdown', e => {
+  const el = e.target.closest('.btn,.tab,.chip,.cell,.mini-copy,.style-row');
+  if(!el) return;
+  const t = e.touches ? e.touches[0] : e;
+  spawnBurst(t.clientX, t.clientY);
+}, { passive:true });
+
+/* ═══════════════════════════════════════════
+   2) التابات
+   ═══════════════════════════════════════════ */
+document.getElementById('tabs').addEventListener('click', e => {
+  const btn = e.target.closest('.tab');
+  if(!btn) return;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(btn.dataset.tab).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* ═══════════════════════════════════════════
+   3) محرك الزخرفة
+   ═══════════════════════════════════════════ */
+const AZ = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const az = 'abcdefghijklmnopqrstuvwxyz';
+const NUM = '0123456789';
+
+function mkMap(up, low, dig, ex){
+  const m = {};
+  for(let i=0;i<26;i++){
+    m[AZ[i]] = String.fromCodePoint(up + i);
+    m[az[i]] = String.fromCodePoint(low + i);
+  }
+  if(dig != null) for(let i=0;i<10;i++) m[NUM[i]] = String.fromCodePoint(dig + i);
+  if(ex) Object.assign(m, ex);
+  return m;
+}
+function applyMap(text, map){
+  let out = '';
+  for(const ch of text) out += (map[ch] !== undefined ? map[ch] : ch);
+  return out;
+}
+
+const M_BOLD   = mkMap(0x1D400, 0x1D41A, 0x1D7CE);
+const M_ITALIC = mkMap(0x1D434, 0x1D44E, null, { h:'ℎ' });
+const M_BITAL  = mkMap(0x1D468, 0x1D482);
+const M_SCRIPT = mkMap(0x1D49C, 0x1D4B6, null,
+  { B:'ℬ', E:'ℰ', F:'ℱ', H:'ℋ', I:'ℐ', L:'ℒ', M:'ℳ', R:'ℛ', e:'ℯ', g:'ℊ', o:'ℴ' });
+const M_BSCRIPT= mkMap(0x1D4D0, 0x1D4EA);
+const M_FRAKT  = mkMap(0x1D504, 0x1D51E, null,
+  { C:'ℭ', H:'ℌ', I:'ℑ', R:'ℜ', Z:'ℨ' });
+const M_DOUBLE = mkMap(0x1D538, 0x1D552, 0x1D7D8,
+  { C:'ℂ', H:'ℍ', N:'ℕ', P:'ℙ', Q:'ℚ', R:'ℝ', Z:'ℤ' });
+const M_SANS   = mkMap(0x1D5A0, 0x1D5BA, 0x1D7E2);
+const M_SANSB  = mkMap(0x1D5D4, 0x1D5EE, 0x1D7EC);
+const M_MONO   = mkMap(0x1D670, 0x1D68A, 0x1D7F6);
+
+const M_SMALL = {a:'ᴀ',b:'ʙ',c:'ᴄ',d:'ᴅ',e:'ᴇ',f:'ꜰ',g:'ɢ',h:'ʜ',i:'ɪ',j:'ᴊ',k:'ᴋ',
+  l:'ʟ',m:'ᴍ',n:'ɴ',o:'ᴏ',p:'ᴘ',q:'ǫ',r:'ʀ',s:'ꜱ',t:'ᴛ',u:'ᴜ',v:'ᴠ',w:'ᴡ',x:'x',y:'ʏ',z:'ᴢ'};
+
+const M_SUP = {'a':'ᵃ','b':'ᵇ','c':'ᶜ','d':'ᵈ','e':'ᵉ','f':'ᶠ','g':'ᵍ','h':'ʰ','i':'ⁱ','j':'ʲ',
+  'k':'ᵏ','l':'ˡ','m':'ᵐ','n':'ⁿ','o':'ᵒ','p':'ᵖ','q':'ᑫ','r':'ʳ','s':'ˢ','t':'ᵗ','u':'ᵘ','v':'ᵛ',
+  'w':'ʷ','x':'ˣ','y':'ʸ','z':'ᶻ','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷',
+  '8':'⁸','9':'⁹','+':'⁺','-':'⁻','=':'⁼','(':'⁽',')':'⁾'};
+
+const M_CIRC = {};
+for(let i=0;i<26;i++){
+  M_CIRC[AZ[i]] = String.fromCodePoint(0x24B6 + i);
+  M_CIRC[az[i]] = String.fromCodePoint(0x24D0 + i);
+}
+for(let i=0;i<9;i++) M_CIRC[String(i+1)] = String.fromCodePoint(0x2460 + i);
+M_CIRC['0'] = '⓪';
+
+const M_NCIRC = {};
+for(let i=0;i<26;i++) M_NCIRC[AZ[i]] = String.fromCodePoint(0x1F150 + i);
+
+const M_SQ = {};
+for(let i=0;i<26;i++) M_SQ[AZ[i]] = String.fromCodePoint(0x1F130 + i);
+
+const M_NSQ = {};
+for(let i=0;i<26;i++) M_NSQ[AZ[i]] = String.fromCodePoint(0x1F170 + i);
+
+const M_PAREN = {};
+for(let i=0;i<26;i++) M_PAREN[az[i]] = String.fromCodePoint(0x249C + i);
+
+const M_FULL = {};
+for(let i=0;i<26;i++){
+  M_FULL[AZ[i]] = String.fromCodePoint(0xFF21 + i);
+  M_FULL[az[i]] = String.fromCodePoint(0xFF41 + i);
+}
+for(let i=0;i<10;i++) M_FULL[NUM[i]] = String.fromCodePoint(0xFF10 + i);
+
+const FLIP = {'a':'ɐ','b':'q','c':'ɔ','d':'p','e':'ǝ','f':'ɟ','g':'ƃ','h':'ɥ','i':'ᴉ','j':'ɾ',
+  'k':'ʞ','l':'l','m':'ɯ','n':'u','o':'o','p':'d','q':'b','r':'ɹ','s':'s','t':'ʇ','u':'n','v':'ʌ',
+  'w':'ʍ','x':'x','y':'ʎ','z':'z','A':'∀','B':'𐐒','C':'Ɔ','D':'◖','E':'Ǝ','F':'Ⅎ','G':'⅁','H':'H',
+  'I':'I','J':'ſ','K':'⋊','L':'˥','M':'W','N':'N','O':'O','P':'Ԁ','Q':'Ό','R':'ᴚ','S':'S','T':'⊥',
+  'U':'∩','V':'Λ','W':'M','X':'X','Y':'⅄','Z':'Z','0':'0','1':'Ɩ','2':'ᄅ','3':'Ɛ','4':'ㄣ','5':'ϛ',
+  '6':'9','7':'ㄥ','8':'8','9':'6','.':'˙',',':"'",'?':'¿','!':'¡','(':')',')':'(','[':']',']':'[',
+  '{':'}','}':'{','<':'>','>':'<','&':'⅋','_':'‾'};
+
+function upside(t){
+  let out = '';
+  for(const c of t) out += (FLIP[c] !== undefined ? FLIP[c] : c);
+  return [...out].reverse().join('');
+}
+const strike   = t => [...t].map(c => c + '\u0336').join('');
+const underln  = t => [...t].map(c => c + '\u0332').join('');
+const tatweel  = t => t.replace(/([\u0621-\u064A])(?=[\u0621-\u064A])/g, '$1ـ');
+const harakat  = t => t.replace(/([\u0621-\u064A])(?![\u064B-\u0652])/g, '$1َ');
+
+const BASES = [
+  { n:'عادي', f: t => t },
+  { n:'عريض', f: t => applyMap(t, M_BOLD) },
+  { n:'مائل', f: t => applyMap(t, M_ITALIC) },
+  { n:'عريض مائل', f: t => applyMap(t, M_BITAL) },
+  { n:'زخرفي', f: t => applyMap(t, M_SCRIPT) },
+  { n:'زخرفي عريض', f: t => applyMap(t, M_BSCRIPT) },
+  { n:'قوطي', f: t => applyMap(t, M_FRAKT) },
+  { n:'مزدوج', f: t => applyMap(t, M_DOUBLE) },
+  { n:'بدون حواف', f: t => applyMap(t, M_SANS) },
+  { n:'بدون حواف عريض', f: t => applyMap(t, M_SANSB) },
+  { n:'آلة كاتبة', f: t => applyMap(t, M_MONO) },
+  { n:'أحرف صغيرة', f: t => applyMap(t.toLowerCase(), M_SMALL) },
+  { n:'دائري', f: t => applyMap(t, M_CIRC) },
+  { n:'دائري أسود', f: t => applyMap(t.toUpperCase(), M_NCIRC) },
+  { n:'مربّع', f: t => applyMap(t.toUpperCase(), M_SQ) },
+  { n:'مربّع أسود', f: t => applyMap(t.toUpperCase(), M_NSQ) },
+  { n:'بين قوسين', f: t => applyMap(t.toLowerCase(), M_PAREN) },
+  { n:'عريض كامل', f: t => applyMap(t, M_FULL) },
+  { n:'مرتفع', f: t => applyMap(t.toLowerCase(), M_SUP) },
+  { n:'مقلوب', f: t => upside(t) },
+  { n:'مشطوب', f: t => strike(t) },
+  { n:'مسطّر', f: t => underln(t) },
+  { n:'تطويل', f: t => tatweel(t) },
+  { n:'تشكيل', f: t => harakat(t) }
+];
+
+const WRAPS = [
+  ['', '', ''],
+  ['نجوم', '★彡 ', ' 彡★'],
+  ['أقواس مزخرفة', '꧁༺ ', ' ༻꧂'],
+  ['زهور', '✿❀ ', ' ❀✿'],
+  ['قلوب', '♡♥ ', ' ♥♡'],
+  ['هلال', '☪ ', ' ☪'],
+  ['قوسان يابانيان', '『 ', ' 』'],
+  ['مربّع مزخرف', '【 ', ' 】'],
+  ['موجة', '≋ ', ' ≋'],
+  ['ملاك', '༄ ', ' ༄'],
+  ['دوائر', '◈ ', ' ◈'],
+  ['برق', '⚡ ', ' ⚡'],
+  ['لهب', '🔥 ', ' 🔥'],
+  ['تاج', '👑 ', ' 👑'],
+  ['درع', '⚔ ', ' ⚔'],
+  ['زخرفة عربية', '﴿ ', ' ﴾'],
+  ['أشرطة', '▀▄▀▄ ', ' ▄▀▄▀'],
+  ['موضة قديمة', '•´¯`•. ', ' .•´¯`•'],
+  ['زخرفة فاخرة', '╰☆☆ ', ' ☆☆╮'],
+  ['فراشة', '🦋 ', ' 🦋'],
+  ['نجمة', '✨ ', ' ✨'],
+  ['أسهم', '»» ', ' ««'],
+  ['معين', '◆◇ ', ' ◇◆'],
+  ['غيوم', '☁ ', ' ☁'],
+  ['موسيقى', '♪♫ ', ' ♫♪'],
+  ['ثلج', '❄ ', ' ❄'],
+  ['شمس', '☀ ', ' ☀'],
+  ['مفتاح', '🔑 ', ' 🔑'],
+  ['جوهرة', '💎 ', ' 💎'],
+  ['سيف', '🗡 ', ' 🗡'],
+  ['أمواج', '〜 ', ' 〜'],
+  ['خط مزخرف', '═══ ', ' ═══'],
+  ['نقاط', '• ', ' •'],
+  ['زوايا', '╔ ', ' ╗'],
+  ['ورقة', '🍃 ', ' 🍃'],
+  ['قوس قزح', '🌈 ', ' 🌈'],
+  ['ساعة رملية', '⏳ ', ' ⏳'],
+  ['أقواس', '[ ', ' ]'],
+  ['سهم', '➤ ', ' ➤'],
+  ['فأل', '⟡ ', ' ⟡'],
+  ['تاج مزدوج', '♔ ', ' ♔'],
+  ['شرارة', '⟣ ', ' ⟣'],
+  ['زخرفة نجمية', '⋆⁺₊⋆ ', ' ⋆₊⁺⋆'],
+  ['إطار نجمي', '─── ⋆⋅☆⋅⋆ ───\n', '\n─── ⋆⋅☆⋅⋆ ───']
+];
+
+const STYLES = [];
+WRAPS.forEach(w => {
+  BASES.forEach(b => {
+    const nm = w[0] ? (b.n + ' ' + w[0]) : b.n;
+    STYLES.push({ n: nm, f: t => w[1] + b.f(t) + w[2] });
+  });
+});
+STYLES.length = Math.min(STYLES.length, 1000);
+
+/* بناء صفوف الزخرفة */
+const decoResults = document.getElementById('decoResults');
+const decoInput   = document.getElementById('decoInput');
+let decoRows = [];
+
+function buildDecoRows(){
+  const frag = document.createDocumentFragment();
+  STYLES.forEach(st => {
+    const row = document.createElement('div');
+    row.className = 'style-row';
+
+    const name = document.createElement('span');
+    name.className = 'style-name';
+    name.textContent = st.n;
+
+    const out = document.createElement('div');
+    out.className = 'style-out';
+    out.textContent = '—';
+
+    const btn = document.createElement('button');
+    btn.className = 'mini-copy';
+    btn.type = 'button';
+    btn.textContent = '⧉';
+    btn.addEventListener('click', () => copyText(out.textContent));
+
+    row.appendChild(name);
+    row.appendChild(out);
+    row.appendChild(btn);
+    row.addEventListener('click', e => {
+      if(e.target === btn) return;
+      copyText(out.textContent);
+    });
+
+    frag.appendChild(row);
+    decoRows.push({ st, out });
+  });
+  decoResults.appendChild(frag);
+}
+
+function updateDeco(){
+  const txt = decoInput.value;
+  decoRows.forEach(({ st, out }) => {
+    out.textContent = txt ? st.f(txt) : '—';
+  });
+}
+decoInput.addEventListener('input', updateDeco);
+
+/* ═══════════════════════════════════════════
+   4) توليد الملصقات والرموز (1000 لكل قسم)
+   ═══════════════════════════════════════════ */
+const cvs = document.createElement('canvas');
+cvs.width = cvs.height = 22;
+const ctx = cvs.getContext('2d', { willReadFrequently: true });
+
+const FONT_EMOJI = '17px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Android Emoji",sans-serif';
+const FONT_SYM   = '17px "Segoe UI Symbol","Apple Symbols","Noto Sans Symbols","DejaVu Sans",sans-serif';
+
+function signature(ch, font){
+  ctx.clearRect(0, 0, 22, 22);
+  ctx.font = font;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#000';
+  ctx.fillText(ch, 11, 11);
+  return ctx.getImageData(0, 0, 22, 22).data;
+}
+
+const REF_A = signature('\uFFFF', FONT_SYM);
+const REF_B = signature('\uFFFF', FONT_EMOJI);
+const REF_C = signature('\u{10FFFE}', FONT_SYM);
+const REF_D = signature('\u{10FFFE}', FONT_EMOJI);
+
+function sameData(a, b){
+  for(let i = 0; i < a.length; i++) if(a[i] !== b[i]) return false;
+  return true;
+}
+function hasPixels(d){
+  for(let i = 3; i < d.length; i += 4) if(d[i]) return true;
+  return false;
+}
+function isValidGlyph(ch, font, refA, refB){
+  const d = signature(ch, font);
+  if(!hasPixels(d)) return false;
+  if(sameData(d, refA) || sameData(d, refB)) return false;
+  return true;
+}
+
+function interleave(arrays){
+  const out = [];
+  let i = 0;
+  while(true){
+    let added = false;
+    for(const arr of arrays){
+      if(i < arr.length){ out.push(arr[i]); added = true; }
+    }
+    if(!added) break;
+    i++;
+  }
+  return out;
+}
+
+function buildList(ranges, font, refA, refB, limit){
+  const groups = ranges.map(([start, end]) => {
+    const arr = [];
+    for(let cp = start; cp <= end; cp++){
+      if(cp >= 0xD800 && cp <= 0xDFFF) continue;
+      if(cp >= 0x1F3FB && cp <= 0x1F3FF) continue;   // درجات لون البشرة
+      if(cp >= 0x1F1E6 && cp <= 0x1F1FF) continue;   // مؤشرات الأعلام المفردة
+      const ch = String.fromCodePoint(cp);
+      if(isValidGlyph(ch, font, refA, refB)) arr.push(ch);
+    }
+    return arr;
+  });
+  return interleave(groups).slice(0, limit);
+}
+
+const EMOJI_RANGES = [
+  [0x1F000, 0x1F0FF],
+  [0x1F100, 0x1F1E5],
+  [0x1F300, 0x1F5FF],
+  [0x1F600, 0x1F64F],
+  [0x1F680, 0x1F6FF],
+  [0x1F900, 0x1F9FF],
+  [0x1FA70, 0x1FAFF]
+];
+
+const SYMBOL_RANGES = [
+  [0x2100, 0x214F],
+  [0x2150, 0x218F],
+  [0x2190, 0x21FF],
+  [0x2200, 0x22FF],
+  [0x2300, 0x23FF],
+  [0x2460, 0x24FF],
+  [0x25A0, 0x25FF],
+  [0x2600, 0x26FF],
+  [0x2700, 0x27BF],
+  [0x2900, 0x297F],
+  [0x2B00, 0x2BFF],
+  [0x1D100, 0x1D1FF]
+];
+
+/* بناء الشبكة */
+function renderGrid(gridEl, list, extraClass, counterEl, store){
+  const frag = document.createDocumentFragment();
+  list.forEach(ch => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'cell' + (extraClass ? ' ' + extraClass : '');
+    b.textContent = ch;
+    b.addEventListener('click', () => copyText(ch));
+    frag.appendChild(b);
+    store.push({ el: b, ch });
+  });
+  gridEl.appendChild(frag);
+  counterEl.textContent = list.length + ' عنصر';
+}
+
+const stickerStore = [];
+const symbolStore  = [];
+
+function setupSearch(inputEl, store){
+  inputEl.addEventListener('input', () => {
+    const q = inputEl.value.trim();
+    store.forEach(item => {
+      item.el.style.display = (!q || item.ch.indexOf(q) !== -1) ? '' : 'none';
+    });
+  });
+}
+
+/* ═══════════════════════════════════════════
+   5) قسم التكرار
+   ═══════════════════════════════════════════ */
+const repeatInput = document.getElementById('repeatInput');
+const repeatOut   = document.getElementById('repeatOut');
+let repeatCount   = 500;
+let repeatValue   = '';
+
+document.getElementById('countChips').addEventListener('click', e => {
+  const chip = e.target.closest('.chip');
+  if(!chip) return;
+  document.querySelectorAll('#countChips .chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  repeatCount = parseInt(chip.dataset.count, 10);
+  doRepeat();
+});
+
+function doRepeat(){
+  const val = repeatInput.value;
+  if(!val){
+    repeatOut.textContent = 'النتيجة ستظهر هنا…';
+    repeatValue = '';
+    return;
+  }
+  repeatValue = val.repeat(repeatCount);
+  repeatOut.textContent = repeatValue;
+}
+
+document.getElementById('repeatBtn').addEventListener('click', () => {
+  doRepeat();
+  if(repeatValue) toast('✓ تم التكرار ' + repeatCount + ' مرة');
+});
+document.getElementById('repeatCopy').addEventListener('click', () => {
+  if(!repeatValue) doRepeat();
+  if(repeatValue) copyText(repeatValue);
+  else toast('اكتب شيئًا أولًا');
+});
+repeatInput.addEventListener('input', doRepeat);
+repeatInput.addEventListener('keydown', e => { if(e.key === 'Enter') doRepeat(); });
+
+/* ═══════════════════════════════════════════
+   6) الإقلاع
+   ═══════════════════════════════════════════ */
+function init(){
+  buildDecoRows();
+  updateDeco();
+
+  // نترك المتصفح يرسم شاشة التحميل أولًا
+  setTimeout(() => {
+    const emojis = buildList(EMOJI_RANGES, FONT_EMOJI, REF_B, REF_D, 1000);
+    const syms   = buildList(SYMBOL_RANGES, FONT_SYM, REF_A, REF_C, 1000);
+
+    renderGrid(
+      document.getElementById('stickerGrid'),
+      emojis, 'emoji',
+      document.getElementById('stickerCount'),
+      stickerStore
+    );
+    renderGrid(
+      document.getElementById('symbolGrid'),
+      syms, '',
+      document.getElementById('symbolCount'),
+      symbolStore
+    );
+
+    setupSearch(document.getElementById('stickerSearch'), stickerStore);
+    setupSearch(document.getElementById('symbolSearch'), symbolStore);
+
+    document.getElementById('loader').classList.add('hide');
+  }, 80);
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', init);
+}else{
+  init();
+}
+</script>
+</body>
+</html>
